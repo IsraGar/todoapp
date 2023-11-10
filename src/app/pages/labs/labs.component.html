@@ -3,3 +3,12 @@
 <ul>
   <li *ngFor="let task of tasks">{{ task }}</li>
 </ul>
+<hr>
+<h2>{{ 'Hola'.repeat(4) }}</h2>
+<p>La suma de 3 + 3 es {{ 3 + 3 }}</p>
+<p>Hola soy {{ name }} y tengo {{ person.age }} años</p>
+<hr>
+<img style="width: 20%;" [src]="person.img" alt="">
+<br>
+<input type="text" [value]="person.name">
+<button [disabled]="disabled">Click me</button>
