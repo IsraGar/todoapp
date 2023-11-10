@@ -24,4 +24,12 @@ export class LabsComponent {
     age: 27,
     img: 'https://images.pexels.com/photos/18900657/pexels-photo-18900657/free-photo-of-luz-de-la-manana-en-la-puerta-de-brandenburgo.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load'
   };
+
+  clickHandler(){
+    alert('Hola');
+  }
+
+  changeHandler(event: Event){
+    console.log(event);    
+  }
 }
