@@ -7,7 +7,7 @@
   <hr>
   <h2>{{ 'Hola'.repeat(4) }}</h2>
   <p>La suma de 3 + 3 es {{ 3 + 3 }}</p>
-  <p>Hola soy {{ name }} y tengo {{ person.age }} años</p>
+  <p>Hola soy {{ name() }} y tengo {{ person.age }} años</p>
   <hr>
   <img style="width: 10%;" [src]="person.img" alt="">
   <br>
@@ -18,4 +18,10 @@
   <button (dblclick)="clickHandler()">Click me</button>
   <p>(change)</p>
   <input type="text" [value]="person.name" (change)="changeHandler($event)">
+  <p>(keydown)</p>
+  <input type="text" [value]="person.name" (keydown)="keydownHandler($event)">
+  <hr>
+  <h2>Signals</h2>
+  <input type="text" [value]="name()" (change)="changeHandler($event)">
+  <p>name: {{ name() }}</p>
 </div>
