@@ -230,6 +230,7 @@
   font-size: 30px;
   color: #949494;
   transition: color 0.2s ease-out;
+  cursor: pointer;
 }
 
 .todo-list li .destroy:hover,
