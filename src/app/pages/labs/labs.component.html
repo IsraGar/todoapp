@@ -2,7 +2,7 @@
   <h1>Hola desde TodoApp</h1>
   <h2>{{ welcome }}</h2>
   <ul>
-    <li *ngFor="let task of tasks">{{ task }}</li>
+    <li *ngFor="let task of tasks()">{{ task }}</li>
   </ul>
   <hr>
   <h2>{{ 'Hola'.repeat(4) }}</h2>
@@ -24,4 +24,11 @@
   <h2>Signals</h2>
   <input type="text" [value]="name()" (change)="changeHandler($event)">
   <p>name: {{ name() }}</p>
+  <hr>
+  <ul>
+    <p>total: {{ tasks().length }} </p>
+    <li *ngFor="let task of tasks(); index as i">
+      {{ i }} - {{ task }}
+    </li>
+  </ul>
 </div>
