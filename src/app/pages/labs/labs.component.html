@@ -45,4 +45,10 @@
   <ng-template #elseC3>
     My content 3 else
   </ng-template>
+  <hr>
+  <div [ngSwitch]="person().name">
+    <p *ngSwitchCase="'Isra'">Soy Isra</p>
+    <p *ngSwitchCase="'Israel'">Soy Israel</p>
+    <p *ngSwitchDefault>No soy nadie</p>
+  </div>
 </div>
