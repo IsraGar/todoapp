@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { signal } from "@angular/core";
+import { ReactiveFormsModule, FormControl } from "@angular/forms";
 
 @Component({
   selector: 'app-labs',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './labs.component.html',
   styleUrl: './labs.component.css'
 })
@@ -20,11 +21,20 @@ export class LabsComponent {
   age = 27;
   disabled = true;
   img = 'https://images.pexels.com/photos/18900657/pexels-photo-18900657/free-photo-of-luz-de-la-manana-en-la-puerta-de-brandenburgo.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load';
+
   person = signal({
     name: 'Isra',
     age: 27,
     img: 'https://images.pexels.com/photos/18900657/pexels-photo-18900657/free-photo-of-luz-de-la-manana-en-la-puerta-de-brandenburgo.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load'
   });
+
+  colorControl = new FormControl();
+
+  constructor(){
+    this.colorControl.valueChanges.subscribe((value) => {
+      console.log(value);   
+    })
+  }
 
   clickHandler(){
     alert('Hola');

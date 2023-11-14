@@ -8,7 +8,8 @@
           placeholder="Type new todo"
           autofocus
           type="text"
-          (change)="changeHandler($event)"
+          [formControl]="newTaskCtrl"
+          (keydown.enter)="changeHandler()"
         />
       </div>
     </header>
