@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { signal } from "@angular/core";
-import { ReactiveFormsModule, FormControl } from "@angular/forms";
+import { ReactiveFormsModule, FormControl, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-labs',
@@ -31,6 +31,13 @@ export class LabsComponent {
   colorControl = new FormControl();
   widthControl = new FormControl(50, {
     nonNullable: true
+  });
+  nameControl = new FormControl('', {
+    nonNullable: true,
+    validators: [
+      Validators.required,
+      Validators.minLength(3)
+    ]
   });
 
   constructor(){
