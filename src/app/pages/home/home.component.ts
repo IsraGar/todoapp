@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, signal, effect, inject, Injector } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Task } from "../../models/task.model";
 import { ReactiveFormsModule, FormControl, Validators } from "@angular/forms";
@@ -12,23 +12,7 @@ import { ReactiveFormsModule, FormControl, Validators } from "@angular/forms";
 })
 export class HomeComponent {
 
-  tasks = signal<Task[]>([
-    {
-      id: Date.now(),
-      title: 'Instalar Angular CLI',
-      completed: true
-    },
-    {
-      id: Date.now(),
-      title: 'Crear proyecto',
-      completed: false
-    },
-    {
-      id: Date.now(),
-      title: 'Crear componentes',
-      completed: false
-    }
-  ]);
+  tasks = signal<Task[]>([]);
 
   newTaskCtrl = new FormControl('', {
     nonNullable: true,
@@ -38,7 +22,26 @@ export class HomeComponent {
     ]
   });
 
+  inject = inject(Injector);
+
+  ngOnInit(){
+    const storage = localStorage.getItem('tasks');
+    if(storage){
+      const tasks = JSON.parse(storage);
+      this.tasks.set(tasks);
+    }
+    this.trackTasks();
+  }
+
+  trackTasks(){
+    effect(() => {
+      const tasks = this.tasks();
+      localStorage.setItem('tasks', JSON.stringify(tasks));    
+    }, {injector: this.inject});
+  }
+
   filter = signal<'all' | 'pending' | 'completed'>('all');
+
   tasksByFilter = computed(() => {
     const filter = this.filter();
     const tasks = this.tasks();
@@ -89,7 +92,6 @@ export class HomeComponent {
           return task;
         })    
     })
-    console.log(this.tasks());
   }
 
   updateTaskEditingMode(index: number){

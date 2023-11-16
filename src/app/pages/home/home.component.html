@@ -58,7 +58,7 @@
         </ul>
       </section>
       <!-- This footer should be hidden by default and shown when there are todos -->
-      <footer class="footer">
+      <footer class="footer" *ngIf="tasksByFilter().length > 0">
         <!-- This should be `0 items left` by default -->
         <span *ngIf="tasksByFilter().length > 1; else oneElement" class="todo-count"><strong>{{ tasksByFilter().length }} </strong> items</span>
         <ng-template #oneElement>
