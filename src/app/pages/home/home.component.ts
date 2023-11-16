@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Task } from "../../models/task.model";
 import { ReactiveFormsModule, FormControl, Validators } from "@angular/forms";
@@ -16,7 +16,7 @@ export class HomeComponent {
     {
       id: Date.now(),
       title: 'Instalar Angular CLI',
-      completed: false
+      completed: true
     },
     {
       id: Date.now(),
@@ -36,6 +36,19 @@ export class HomeComponent {
       Validators.required,
       Validators.minLength(3)
     ]
+  });
+
+  filter = signal<'all' | 'pending' | 'completed'>('all');
+  tasksByFilter = computed(() => {
+    const filter = this.filter();
+    const tasks = this.tasks();
+    if(filter === 'pending'){
+      return tasks.filter(task => !task.completed);
+    }
+    if(filter === 'completed'){
+      return tasks.filter(task => task.completed);
+    }
+    return tasks;
   });
 
   changeHandler(){
@@ -111,6 +124,10 @@ export class HomeComponent {
           return task
         })    
     })
+  }
+
+  changeFilter(filter: 'all' | 'pending' | 'completed'){
+    this.filter.set(filter);
   }
   
 }

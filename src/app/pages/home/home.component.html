@@ -19,7 +19,7 @@
         <ul class="todo-list">
           <li
           (dblclick)="updateTaskEditingMode(i)"
-          *ngFor="let task of tasks(); index as i"
+          *ngFor="let task of tasksByFilter(); index as i"
           [class.editing]="task.editing"
           [class.completed]="task.completed">
             <div class="view">
@@ -60,20 +60,20 @@
       <!-- This footer should be hidden by default and shown when there are todos -->
       <footer class="footer">
         <!-- This should be `0 items left` by default -->
-        <span *ngIf="tasks().length > 1; else oneElement" class="todo-count"><strong>{{ tasks().length }} </strong> items</span>
+        <span *ngIf="tasksByFilter().length > 1; else oneElement" class="todo-count"><strong>{{ tasksByFilter().length }} </strong> items</span>
         <ng-template #oneElement>
-          <span class="todo-count"><strong>{{ tasks().length }} </strong> item</span>
+          <span class="todo-count"><strong>{{ tasksByFilter().length }} </strong> item</span>
         </ng-template>        
         <!-- Remove this if you don't implement routing -->
         <ul class="filters">
           <li>
-            <a routerLink="/" class="selected">All</a>
+            <a (click)="changeFilter('all')" [class.selected]="filter() === 'all'">All</a>
           </li>
           <li>
-            <a routerLink="/pending">Pending</a>
+            <a (click)="changeFilter('pending')" [class.selected]="filter() === 'pending'">Pending</a>
           </li>
           <li>
-            <a routerLink="/completed">Completed</a>
+            <a (click)="changeFilter('completed')" [class.selected]="filter() === 'completed'">Completed</a>
           </li>
         </ul>
         <!-- Hidden if no completed items are left ↓ -->
