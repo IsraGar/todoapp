@@ -36,7 +36,7 @@ jobs:
         run: npm run build:prod
       # Route file renaming
       - name: Rename index for routing
-       run: mv dist/todoapp/index.html dist/todoapp/404.html
+        run: mv dist/todoapp/index.html dist/todoapp/404.html
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v4.0.0
